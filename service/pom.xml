@@ -19,23 +19,63 @@
 
     <artifactId>service</artifactId>
 
+    <properties>
+        <version.ElevatorAPI>1.0-SNAPSHOT</version.ElevatorAPI>
+        <version.commons.lang3>3.4</version.commons.lang3>
+        <version.jackson>2.8.6</version.jackson>
+        <version.spring.boot>1.5.6.RELEASE</version.spring.boot>
+
+        <version.junit>4.12</version.junit>
+        <version.mockito>2.7.22</version.mockito>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.hardware.vendor</groupId>
             <artifactId>ElevatorAPI</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${version.ElevatorAPI}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>${version.commons.lang3}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <!-- Import dependency management from Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${version.spring.boot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>${version.spring.boot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${version.spring.boot}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson</groupId>
+            <artifactId>jackson-bom</artifactId>
+            <version>${version.jackson}</version>
+            <type>pom</type>
+            <scope>import</scope>
         </dependency>
 
         <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${version.junit}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -44,6 +84,11 @@
             <version>1.9.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${version.mockito}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -51,11 +96,79 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                    <failOnError>true</failOnError>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifest>
+                            <addDefaultSpecificationEntries />
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!--TODO: clean up this plugin config-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${version.spring.boot}</version>
+                <executions>
+                    <!-- Integration test mode -->
+                    <execution>
+                        <id>start-boot</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <skip>true</skip>
+                            <profiles>local</profiles>
+                            <wait>1000</wait>
+                            <maxAttempts>60</maxAttempts>
+                            <fork>true</fork>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-boot</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                        <phase>post-integration-test</phase>
+                        <configuration>
+                            <skip>true</skip>
+                            <fork>true</fork>
+                        </configuration>
+                    </execution>
+                    <!-- Info for actuator -->
+                    <execution>
+                        <id>build-info</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                    <!-- General boot usage -->
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <!-- still repackage on a fast build -->
+                            <skip>false</skip>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
