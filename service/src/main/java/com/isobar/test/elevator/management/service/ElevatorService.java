@@ -2,12 +2,12 @@
 package com.isobar.test.elevator.management.service;
 
 import com.isobar.test.elevator.management.service.model.*;
-import com.isobar.test.elevator.management.service.routing.PreAssignRequestCommandStrategy;
 import com.isobar.test.elevator.management.service.routing.RoutingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.isobar.test.elevator.management.service.model.Direction.DOWN;
 import static com.isobar.test.elevator.management.service.model.Direction.UP;

@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) Message4U Pty Ltd 2014-2018
-  ~
-  ~ Except as otherwise permitted by the Copyright Act 1967 (Cth) (as amended from time to time) and/or any other
-  ~ applicable copyright legislation, the material may not be reproduced in any format and in any way whatsoever
-  ~ without the prior written consent of the copyright owner.
-  -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -22,11 +15,13 @@
     <properties>
         <version.ElevatorAPI>1.0-SNAPSHOT</version.ElevatorAPI>
         <version.commons.lang3>3.4</version.commons.lang3>
+        <version.commons.io>1.3.2</version.commons.io>
         <version.jackson>2.8.6</version.jackson>
         <version.spring.boot>1.5.6.RELEASE</version.spring.boot>
 
         <version.junit>4.12</version.junit>
         <version.mockito>2.7.22</version.mockito>
+        <version.failsafe.plugin>2.18.1</version.failsafe.plugin>
     </properties>
 
     <dependencies>
@@ -43,7 +38,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.3.2</version>
+            <version>${version.commons.io}</version>
         </dependency>
         <!-- Import dependency management from Spring Boot -->
         <dependency>
@@ -102,6 +97,19 @@
             <version>1.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <version>${version.spring.boot}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.10.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -132,7 +140,25 @@
                 </configuration>
             </plugin>
 
-            <!--TODO: clean up this plugin config-->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${version.failsafe.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -146,7 +172,7 @@
                         </goals>
                         <phase>pre-integration-test</phase>
                         <configuration>
-                            <skip>true</skip>
+                            <skip>${skipTests}</skip>
                             <profiles>local</profiles>
                             <wait>1000</wait>
                             <maxAttempts>60</maxAttempts>
@@ -160,24 +186,21 @@
                         </goals>
                         <phase>post-integration-test</phase>
                         <configuration>
-                            <skip>true</skip>
+                            <skip>${skipTests}</skip>
                             <fork>true</fork>
                         </configuration>
                     </execution>
-                    <!-- Info for actuator -->
                     <execution>
                         <id>build-info</id>
                         <goals>
                             <goal>build-info</goal>
                         </goals>
                     </execution>
-                    <!-- General boot usage -->
                     <execution>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <!-- still repackage on a fast build -->
                             <skip>false</skip>
                         </configuration>
                     </execution>

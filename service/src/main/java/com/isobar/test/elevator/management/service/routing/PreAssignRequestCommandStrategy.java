@@ -1,12 +1,4 @@
 
-/*
- * Copyright (c) Message4U Pty Ltd 2014-2018
- *
- * Except as otherwise permitted by the Copyright Act 1967 (Cth) (as amended from time to time) and/or any other
- * applicable copyright legislation, the material may not be reproduced in any format and in any way whatsoever
- * without the prior written consent of the copyright owner.
- */
-
 package com.isobar.test.elevator.management.service.routing;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -15,7 +7,9 @@ import com.isobar.test.elevator.management.service.model.Elevator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.isobar.test.elevator.management.service.model.Direction.DOWN;
 import static com.isobar.test.elevator.management.service.model.Direction.UP;

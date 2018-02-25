@@ -19,7 +19,7 @@ import java.util.Set;
 import static com.google.common.collect.ImmutableSet.of;
 import static com.isobar.test.elevator.management.service.model.Direction.DOWN;
 import static com.isobar.test.elevator.management.service.model.Direction.UP;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(DataProviderRunner.class)
 public class PreAssignRequestCommandStrategyTest {

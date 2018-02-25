@@ -4,6 +4,7 @@ package com.isobar.test.elevator.management.service.controller;
 import com.isobar.test.elevator.management.service.ElevatorService;
 import com.isobar.test.elevator.management.service.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -16,8 +17,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 public class CommandsController {
 
-    private static final int MIN_FLOOR = 0;
-    private static final int MAX_FLOOR = 5;
+    @Value("${service.min.floor}")
+    private int minFloor = 0;
+    @Value("${service.max.floor}")
+    private int maxFloor = 5;
 
     private final ElevatorService service;
     private final Map<Integer, Elevator> elevatorMap;
@@ -50,15 +53,15 @@ public class CommandsController {
         switch (command.getButton()) {
             case UP_BUTTON:
                 UpCommand upCommand = (UpCommand) command;
-                validateFloor(upCommand.getFloor(), MIN_FLOOR, MAX_FLOOR - 1);
+                validateFloor(upCommand.getFloor(), minFloor, maxFloor - 1);
                 break;
             case DOWN_BUTTON:
                 DownCommand downCommand = (DownCommand) command;
-                validateFloor(downCommand.getFloor(), MIN_FLOOR + 1, MAX_FLOOR);
+                validateFloor(downCommand.getFloor(), minFloor + 1, maxFloor);
                 break;
             case FLOOR_BUTTON:
                 FloorCommand floorCommand = (FloorCommand) command;
-                validateFloor(floorCommand.getFloor(), MIN_FLOOR, MAX_FLOOR);
+                validateFloor(floorCommand.getFloor(), minFloor, maxFloor);
                 validateElevatorId(floorCommand.getElevatorId());
                 break;
             case STOP_BUTTON:

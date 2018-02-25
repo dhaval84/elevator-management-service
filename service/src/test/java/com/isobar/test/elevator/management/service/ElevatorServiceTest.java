@@ -1,10 +1,3 @@
-/*
- * Copyright (c) Message4U Pty Ltd 2014-2018
- *
- * Except as otherwise permitted by the Copyright Act 1967 (Cth) (as amended from time to time) and/or any other
- * applicable copyright legislation, the material may not be reproduced in any format and in any way whatsoever
- * without the prior written consent of the copyright owner.
- */
 
 package com.isobar.test.elevator.management.service;
 
@@ -12,7 +5,6 @@ import com.isobar.test.elevator.management.service.model.*;
 import com.isobar.test.elevator.management.service.routing.RoutingStrategy;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 
 import java.io.ByteArrayOutputStream;
@@ -21,9 +13,7 @@ import java.util.Map;
 
 import static com.isobar.test.elevator.management.service.model.Direction.DOWN;
 import static com.isobar.test.elevator.management.service.model.Direction.UP;
-import static com.isobar.test.elevator.management.service.model.ElevatorState.MOVING;
-import static com.isobar.test.elevator.management.service.model.ElevatorState.STOPPED;
-import static com.isobar.test.elevator.management.service.model.ElevatorState.WAITING;
+import static com.isobar.test.elevator.management.service.model.ElevatorState.*;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.junit.Assert.*;

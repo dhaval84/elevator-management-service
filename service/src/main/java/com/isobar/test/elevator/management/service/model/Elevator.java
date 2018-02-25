@@ -5,7 +5,10 @@ import com.isobar.test.elevator.management.service.ArrivalEventDistributor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.test.elevator.api.ElevatorFacade;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 import static com.isobar.test.elevator.management.service.model.Direction.DOWN;
 import static com.isobar.test.elevator.management.service.model.Direction.UP;
