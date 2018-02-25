@@ -6,17 +6,9 @@
  * without the prior written consent of the copyright owner.
  */
 
-package com.isobar.test.elevator.management.service.model;
+package com.isobar.test.elevator.management.service;
 
-public enum Button {
-    UP_BUTTON("UP"),
-    DOWN_BUTTON("DOWN"),
-    STOP_BUTTON("STOP"),
-    FLOOR_BUTTON("FLOOR");
+public interface ArrivalEventListener {
 
-    private final String buttonName;
-
-    Button(String buttonName) {
-        this.buttonName = buttonName;
-    }
+    void elevatorArrived(int elevatorId, int floor);
 }

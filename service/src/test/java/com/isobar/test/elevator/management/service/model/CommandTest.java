@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BaseCommandTest {
+public class CommandTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -34,14 +34,14 @@ public class BaseCommandTest {
 
     @Test
     public void shouldBeAbleToDeSerializeToFloorCommand() throws Exception {
-        FloorCommand expectedCommand = new FloorCommand(4);
+        FloorCommand expectedCommand = new FloorCommand(2, 4);
 
         assertEquals(expectedCommand, mapper.readValue(getFileString("/floorCommand.json"), FloorCommand.class));
     }
 
     @Test
     public void shouldBeAbleToDeSerializeToStopCommand() throws Exception {
-        StopCommand expectedCommand = new StopCommand();
+        StopCommand expectedCommand = new StopCommand(1);
 
         assertEquals(expectedCommand, mapper.readValue(getFileString("/stopCommand.json"), StopCommand.class));
     }

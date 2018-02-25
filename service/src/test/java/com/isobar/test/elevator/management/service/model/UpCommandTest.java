@@ -4,7 +4,7 @@ package com.isobar.test.elevator.management.service.model;
 import org.junit.Test;
 
 import static com.isobar.test.elevator.management.service.TestUtilities.assertCanonical;
-import static com.isobar.test.elevator.management.service.model.Button.UP;
+import static com.isobar.test.elevator.management.service.model.Button.UP_BUTTON;
 import static org.junit.Assert.*;
 
 public class UpCommandTest {
@@ -20,6 +20,6 @@ public class UpCommandTest {
 
     @Test
     public void shouldTestButtonMember() {
-        assertEquals(UP, new UpCommand(1).getButton());
+        assertEquals(UP_BUTTON, new UpCommand(1).getButton());
     }
 }

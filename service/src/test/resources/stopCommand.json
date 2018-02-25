@@ -1,3 +1,4 @@
 {
-  "button": "STOP"
+  "button": "STOP",
+  "elevatorId": 1
 }

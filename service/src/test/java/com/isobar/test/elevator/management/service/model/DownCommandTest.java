@@ -11,7 +11,7 @@ package com.isobar.test.elevator.management.service.model;
 import org.junit.Test;
 
 import static com.isobar.test.elevator.management.service.TestUtilities.assertCanonical;
-import static com.isobar.test.elevator.management.service.model.Button.DOWN;
+import static com.isobar.test.elevator.management.service.model.Button.DOWN_BUTTON;
 import static org.junit.Assert.*;
 
 public class DownCommandTest {
@@ -27,6 +27,6 @@ public class DownCommandTest {
 
     @Test
     public void shouldTestButtonMember() {
-        assertEquals(DOWN, new DownCommand(1).getButton());
+        assertEquals(DOWN_BUTTON, new DownCommand(1).getButton());
     }
 }

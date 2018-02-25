@@ -8,25 +8,27 @@
 
 package com.isobar.test.elevator.management.service.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Objects;
 
-public abstract class FloorBasedCommand extends BaseCommand {
+public abstract class RequestCommand extends Command {
 
     private final int floor;
+    private final Direction direction;
 
-    public FloorBasedCommand(Button button, int floor) {
+    public RequestCommand(Button button, Direction direction, int floor) {
         super(button);
+        this.direction = direction;
         this.floor = floor;
     }
 
     public int getFloor() {
         return floor;
+    }
+
+    public boolean has(Direction inputDirection, int inputFloor) {
+        return inputDirection.equals(direction) && inputFloor == floor;
     }
 
     @Override
@@ -38,14 +40,15 @@ public abstract class FloorBasedCommand extends BaseCommand {
             return false;
         }
 
-        final FloorBasedCommand other = (FloorBasedCommand) obj;
-        return Objects.equals(getButton(), other.getButton()) &&
-                Objects.equals(floor, other.floor);
+        final RequestCommand other = (RequestCommand) obj;
+        return (Objects.equals(getButton(), other.getButton())
+                || Objects.equals(direction, other.direction))
+                && Objects.equals(floor, other.floor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getButton(), floor);
+        return Objects.hash(getButton(), floor, direction);
     }
 
 
@@ -53,6 +56,7 @@ public abstract class FloorBasedCommand extends BaseCommand {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("button", getButton())
-                .append("floor", floor).toString();
+                .append("floor", floor)
+                .append("direction", direction).toString();
     }
 }

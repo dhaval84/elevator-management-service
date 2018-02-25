@@ -19,12 +19,12 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = DownCommand.class, name = "DOWN"),
         @JsonSubTypes.Type(value = FloorCommand.class, name = "FLOOR"),
 })
-public abstract class BaseCommand {
+public abstract class Command {
 
     private final Button button;
 
     @JsonCreator
-    public BaseCommand(@JsonProperty("button") Button button) {
+    public Command(@JsonProperty("button") Button button) {
         this.button = button;
     }
 
@@ -41,7 +41,7 @@ public abstract class BaseCommand {
             return false;
         }
 
-        final BaseCommand other = (BaseCommand) obj;
+        final Command other = (Command) obj;
         return Objects.equals(getButton(), other.getButton());
     }
 
