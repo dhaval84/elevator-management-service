@@ -14,10 +14,8 @@ import static com.isobar.test.elevator.management.service.model.ElevatorState.*;
 public class Elevator {
 
     private final int id;
-    private boolean active = true;
     private Direction direction;
     private int floor;
-    private boolean breaksOn = false;
     private ElevatorState state = WAITING;
     private final ElevatorFacade facade;
     private final ArrivalEventDistributor distributor;
@@ -38,14 +36,6 @@ public class Elevator {
         return id;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     public Direction getDirection() {
         return direction;
     }
@@ -60,14 +50,6 @@ public class Elevator {
 
     public void setFloor(int floor) {
         this.floor = floor;
-    }
-
-    public boolean isBreaksOn() {
-        return breaksOn;
-    }
-
-    public void setBreaksOn(boolean breaksOn) {
-        this.breaksOn = breaksOn;
     }
 
     public ElevatorState getState() {
@@ -134,10 +116,8 @@ public class Elevator {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-                .append("active", active)
                 .append("direction", direction)
                 .append("floor", floor)
-                .append("state", state)
-                .append("breaksOn", breaksOn).toString();
+                .append("state", state).toString();
     }
 }
