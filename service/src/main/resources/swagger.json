@@ -1,0 +1,230 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "commands-controller",
+      "description": "Commands Controller"
+    },
+    {
+      "name": "support-controller",
+      "description": "Support Controller"
+    }
+  ],
+  "paths": {
+    "/commands": {
+      "post": {
+        "tags": [
+          "commands-controller"
+        ],
+        "summary": "commandReceived",
+        "operationId": "commandReceivedUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "command",
+            "description": "command",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Command"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/support/elevators": {
+      "get": {
+        "tags": [
+          "support-controller"
+        ],
+        "summary": "getElevatorStatus",
+        "operationId": "getElevatorStatusUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ElevatorPublic"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Command": {
+      "type": "object",
+      "oneOf": [
+        "#/definitions/UpCommand",
+        "#/definitions/DownCommand",
+        "#/definitions/FloorCommand",
+        "#/definitions/StopCommand"
+      ]
+    },
+    "UpCommand": {
+      "type": "object",
+      "required": [
+        "button",
+        "floor"
+      ],
+      "properties": {
+        "button": {
+          "type": "string",
+          "enum": [
+            "UP"
+          ]
+        },
+        "floor": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "DownCommand": {
+      "type": "object",
+      "required": [
+        "button",
+        "floor"
+      ],
+      "properties": {
+        "button": {
+          "type": "string",
+          "enum": [
+            "DOWN"
+          ]
+        },
+        "floor": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "FloorCommand": {
+      "type": "object",
+      "required": [
+        "button",
+        "floor",
+        "elevatorId"
+      ],
+      "properties": {
+        "button": {
+          "type": "string",
+          "enum": [
+            "FLOOR"
+          ]
+        },
+        "floor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "elevatorId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "StopCommand": {
+      "type": "object",
+      "required": [
+        "button",
+        "elevatorId"
+      ],
+      "properties": {
+        "button": {
+          "type": "string",
+          "enum": [
+            "STOP"
+          ]
+        },
+        "elevatorId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ElevatorPublic": {
+      "type": "object",
+      "properties": {
+        "destinationFloor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "UP",
+            "DOWN"
+          ]
+        },
+        "floor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "MOVING",
+            "WAITING",
+            "STOPPED"
+          ]
+        }
+      }
+    }
+  }
+}

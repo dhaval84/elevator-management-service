@@ -27,7 +27,6 @@ public class PreAssignRequestCommandStrategy implements RoutingStrategy {
 
     @Override
     public synchronized void addRouteToAnyElevator(DestinationRoute destinationRoute) {
-        // TODO: If the number of hops are same than check how far elevators are
         Optional<Elevator> elevatorWithMinHops = elevatorMap.values().stream()
                 .min(Comparator.comparing(elevator -> hopsRemaining(elevator, destinationRoute)));
         if (elevatorWithMinHops.isPresent()) {
