@@ -7,16 +7,16 @@ import java.util.Objects;
 
 public abstract class RequestCommand extends Command {
 
-    private final int floor;
+    private final Integer floor;
     private final Direction direction;
 
-    public RequestCommand(Button button, Direction direction, int floor) {
+    public RequestCommand(Button button, Direction direction, Integer floor) {
         super(button);
         this.direction = direction;
         this.floor = floor;
     }
 
-    public int getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 

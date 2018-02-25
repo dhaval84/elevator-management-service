@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.rules.SpringMethodRule;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
-@SpringBootTest(webEnvironment = NONE)
+@SpringBootTest
 public abstract class BaseControllerIT {
 
     public static final String HOST_URL = "http://localhost:8080";

@@ -65,21 +65,20 @@ public class CommandsController {
                 validateElevatorId(floorCommand.getElevatorId());
                 break;
             case STOP_BUTTON:
-                StopCommand stopCommand = (StopCommand) command;
-                validateElevatorId(stopCommand.getElevatorId());
+                validateElevatorId(((StopCommand) command).getElevatorId());
                 break;
         }
     }
 
-    private void validateElevatorId(int elevatorId) {
+    private void validateElevatorId(Integer elevatorId) {
         elevatorMap.values().stream()
                 .filter(elevator -> elevator.getId() == elevatorId)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ElevatorId: " + elevatorId));
     }
 
-    private void validateFloor(int floor, int minFloor, int maxFloor) {
-        if (floor < minFloor || floor > maxFloor) {
+    private void validateFloor(Integer floor, int minFloor, int maxFloor) {
+        if (floor == null || floor < minFloor || floor > maxFloor) {
             throw new IllegalArgumentException("Invalid Floor for the command: " + floor);
         }
     }

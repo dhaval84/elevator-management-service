@@ -10,7 +10,7 @@ import static com.isobar.test.elevator.management.service.model.Direction.UP;
 public class UpCommand extends RequestCommand {
 
     @JsonCreator
-    public UpCommand(@JsonProperty("floor") int floor) {
+    public UpCommand(@JsonProperty("floor") Integer floor) {
         super(UP_BUTTON, UP, floor);
     }
 }

@@ -11,7 +11,7 @@ import static com.isobar.test.elevator.management.service.model.Button.STOP_BUTT
 public class StopCommand extends SelectedElevatorCommand {
 
     @JsonCreator
-    public StopCommand(@JsonProperty("elevatorId") int elevatorId) {
+    public StopCommand(@JsonProperty("elevatorId") Integer elevatorId) {
         super(STOP_BUTTON, elevatorId);
     }
 

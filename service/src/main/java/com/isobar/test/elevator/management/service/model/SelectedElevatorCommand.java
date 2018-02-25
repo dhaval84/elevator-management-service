@@ -3,14 +3,14 @@ package com.isobar.test.elevator.management.service.model;
 
 public abstract class SelectedElevatorCommand extends Command {
 
-    private final int elevatorId;
+    private final Integer elevatorId;
 
-    public SelectedElevatorCommand(Button button, int elevatorId) {
+    public SelectedElevatorCommand(Button button, Integer elevatorId) {
         super(button);
         this.elevatorId = elevatorId;
     }
 
-    public int getElevatorId() {
+    public Integer getElevatorId() {
         return elevatorId;
     }
 }

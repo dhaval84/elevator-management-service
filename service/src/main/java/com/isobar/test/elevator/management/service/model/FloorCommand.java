@@ -11,15 +11,15 @@ import static com.isobar.test.elevator.management.service.model.Button.FLOOR_BUT
 
 public class FloorCommand extends SelectedElevatorCommand {
 
-    private final int floor;
+    private final Integer floor;
 
     @JsonCreator
-    public FloorCommand(@JsonProperty("elevatorId") int elevatorId, @JsonProperty("floor") int floor) {
+    public FloorCommand(@JsonProperty("elevatorId") Integer elevatorId, @JsonProperty("floor") Integer floor) {
         super(FLOOR_BUTTON, elevatorId);
         this.floor = floor;
     }
 
-    public int getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 

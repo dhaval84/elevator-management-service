@@ -10,7 +10,7 @@ import static com.isobar.test.elevator.management.service.model.Direction.DOWN;
 public class DownCommand extends RequestCommand {
 
     @JsonCreator
-    public DownCommand(@JsonProperty("floor") int floor) {
+    public DownCommand(@JsonProperty("floor") Integer floor) {
         super(DOWN_BUTTON, DOWN, floor);
     }
 }
