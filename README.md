@@ -32,3 +32,4 @@ In order to run the application after a successful build, execute following comm
  - Only one routing strategy available
  - Swagger spec is included in service/src/main/resources folder
  - Build runs unit tests and integration tests
+ - Manually edited generated Swagger file to specify various commands (Java inheritance)
